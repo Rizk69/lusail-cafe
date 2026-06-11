@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   LUSAIL CAFÉ — كافيه لوسيل
+   A serene, luxe Levantine café identity:
+   deep pine green + warm brass + terracotta clay + cream.
+   Bilingual AR / EN, fully RTL-aware (logical properties throughout).
+============================================================================ */
+@theme {
+  /* greens — the calm, the "serene ambiance" */
+  --color-ink: #06120d;
+  --color-pine: #0a1c14;
+  --color-forest: #0f2519;
+  --color-moss: #163322;
+  --color-fern: #1d4630;
+  --color-line: #244c37;
+
+  /* brass / gold — the gilded accents */
+  --color-brass: #c9a25e;
+  --color-brass-bright: #ecd29a;
+  --color-brass-deep: #9a7330;
+
+  /* terracotta clay — warmth for food + CTAs */
+  --color-clay: #c76b43;
+  --color-clay-soft: #e0936a;
+
+  /* light */
+  --color-cream: #f4ecda;
+  --color-sand: #cdbf9f;
+
+  /* type — defaults are Arabic (the default locale); EN overridden below */
+  --font-display: var(--font-messiri), "El Messiri", Georgia, serif;
+  --font-body: var(--font-tajawal), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-brass: 0 0 44px -10px rgba(201, 162, 94, 0.55);
+  --shadow-clay: 0 0 44px -10px rgba(199, 107, 67, 0.5);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-rev: marquee-rev 38s linear infinite;
+  --animate-steam: steam 4.2s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 28s linear infinite;
+  --animate-pan: pan 18s ease infinite;
+  --animate-cue: cue 1.8s ease-in-out infinite;
+}
+
+/* English locale flips to a Latin pairing (cascades down from <html lang>) */
+html[lang="en"] {
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@keyframes steam {
+  0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.35; }
+  50% { transform: translateY(-12px) scaleY(1.12); opacity: 0.8; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes sheen {
+  from { transform: translateX(-130%) skewX(-18deg); }
+  to { transform: translateX(130%) skewX(-18deg); }
+}
+@keyframes pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes cue {
+  0% { transform: translateY(0); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: translateY(13px); opacity: 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+* { border-color: var(--color-line); }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: var(--color-pine);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* fixed ambient glow on its own compositor layer (no per-scroll repaint) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1100px 720px at 80% -8%, rgba(201, 162, 94, 0.12), transparent 60%),
+    radial-gradient(820px 620px at 6% 4%, rgba(29, 70, 48, 0.55), transparent 58%),
+    radial-gradient(700px 700px at 95% 100%, rgba(199, 107, 67, 0.08), transparent 60%);
+}
+
+::selection { background: var(--color-brass); color: var(--color-ink); }
+
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-brass-deep), var(--color-brass));
+  border-radius: 99px;
+  border: 2px solid var(--color-ink);
+}
+
+/* ----------------------------------------------------------------------------
+   Utilities
+---------------------------------------------------------------------------- */
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+
+  .text-brass-gradient {
+    background-image: linear-gradient(135deg, var(--color-brass-bright), var(--color-brass) 45%, var(--color-brass-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-clay-gradient {
+    background-image: linear-gradient(135deg, var(--color-clay-soft), var(--color-clay) 60%, #a04e2c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brass-line {
+    background-image: linear-gradient(90deg, transparent, var(--color-brass), transparent);
+  }
+
+  .glass {
+    background: color-mix(in oklab, var(--color-forest) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid color-mix(in oklab, var(--color-brass) 20%, transparent);
+  }
+  /* lighter glass for the hero — it sits over the live WebGL canvas */
+  .glass-hero {
+    background: color-mix(in oklab, var(--color-forest) 60%, transparent);
+    backdrop-filter: blur(7px) saturate(125%);
+    -webkit-backdrop-filter: blur(7px) saturate(125%);
+    border: 1px solid color-mix(in oklab, var(--color-brass) 18%, transparent);
+  }
+
+  .card-surface {
+    background:
+      linear-gradient(160deg, rgba(201, 162, 94, 0.07), transparent 42%),
+      var(--color-forest);
+  }
+
+  .glow-brass { box-shadow: var(--shadow-brass); }
+  .glow-clay { box-shadow: var(--shadow-clay); }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  .perspective { perspective: 1200px; }
+  .preserve-3d { transform-style: preserve-3d; }
+
+  /* gilded double frame — "نرصّع بالدهب" */
+  .brass-frame {
+    box-shadow:
+      0 0 0 1px rgba(201, 162, 94, 0.55),
+      0 0 0 5px rgba(6, 18, 13, 0.92),
+      0 0 0 6px rgba(201, 162, 94, 0.28);
+  }
+  .brass-hairline { box-shadow: 0 0 0 1px rgba(201, 162, 94, 0.32); }
+
+  /* diagonal sheen sweep — add .sheen-layer inside a .group, sweeps on hover */
+  .sheen-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .sheen-layer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(236, 210, 154, 0.35), transparent);
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  .group:hover .sheen-layer::before { animation: sheen 0.9s ease; }
+
+  .text-glow { text-shadow: 0 0 28px rgba(201, 162, 94, 0.4); }
+
+  .animated-mesh {
+    background-size: 200% 200%;
+    background-image: linear-gradient(120deg, var(--color-forest), var(--color-moss) 35%, var(--color-fern) 60%, var(--color-forest));
+  }
+
+  /* tiny caps label */
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
