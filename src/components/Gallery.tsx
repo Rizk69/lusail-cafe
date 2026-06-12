@@ -1,51 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import type { ComponentType, SVGProps } from "react";
 import Image from "next/image";
 import { useLocale } from "@/lib/LocaleProvider";
 import { GALLERY } from "@/lib/content";
 import type { GalleryItem } from "@/lib/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
-import { CupIcon, LeafIcon, BeanIcon, PlateIcon, StarIcon } from "@/components/ui/Icons";
+import { CafeArt } from "@/components/ui/CafeArt";
 import { cn } from "@/lib/utils";
 
-type IconType = ComponentType<SVGProps<SVGSVGElement>>;
-type KindStyle = { grad: string; Icon: IconType };
-
-/* On-brand composition per gallery `kind` — gradient + glyph, no photos.
-   When a tile has `photo` set (see content.ts), the real image renders on top
-   and this art becomes its loading/fallback layer. */
-const kindStyle: Record<string, KindStyle> = {
-  latte: { grad: "from-brass/25 to-forest", Icon: CupIcon },
-  interior: { grad: "from-fern to-pine", Icon: LeafIcon },
-  beans: { grad: "from-moss to-ink", Icon: BeanIcon },
-  breakfast: { grad: "from-clay/30 to-forest", Icon: PlateIcon },
-  dessert: { grad: "from-clay/25 to-moss", Icon: StarIcon },
-  counter: { grad: "from-brass/20 to-pine", Icon: CupIcon },
+/* On-brand gradient per gallery `kind` (black & gold ground). The animated
+   <CafeArt> sits on top; when a tile has a real `photo` (see content.ts) the
+   image renders over both and the art is skipped. */
+const kindGrad: Record<string, string> = {
+  latte: "from-brass/20 to-forest",
+  interior: "from-fern to-ink",
+  beans: "from-moss to-ink",
+  breakfast: "from-clay/25 to-forest",
+  dessert: "from-clay/20 to-moss",
+  counter: "from-brass/15 to-pine",
 };
-
-const fallback: KindStyle = { grad: "from-forest to-pine", Icon: CupIcon };
 
 function Tile({ item }: { item: GalleryItem }) {
   const { pick } = useLocale();
-  const { grad, Icon } = kindStyle[item.kind] ?? fallback;
-  // If the photo file is missing at runtime, drop back to the SVG art.
+  const grad = kindGrad[item.kind] ?? "from-forest to-pine";
+  // If the photo file is missing at runtime, drop back to the animated art.
   const [photoOk, setPhotoOk] = useState(Boolean(item.photo));
   const showPhoto = Boolean(item.photo) && photoOk;
 
   return (
     <div className="group relative h-full overflow-hidden rounded-3xl border border-line/60">
-      {/* on-brand art — always rendered; sits under the photo as a backdrop */}
+      {/* dark ground */}
       <div className={cn("absolute inset-0 bg-gradient-to-br", grad)} />
       <div className="grain absolute inset-0" />
-      <div className="absolute inset-0 grid place-items-center">
-        <Icon className="h-24 w-24 text-cream/10 transition duration-500 group-hover:scale-110" />
-      </div>
 
-      {/* real photo (optional). alt="" — the visible caption below labels the
-          tile, so the photo is decorative and skipped by screen readers. */}
+      {/* animated gold line-art of the drink/dish (hidden once a photo loads) */}
+      {!showPhoto && (
+        <div className="absolute inset-0 grid place-items-center p-5">
+          <CafeArt
+            kind={item.kind}
+            className="h-36 w-36 opacity-80 transition duration-500 group-hover:scale-[1.07] group-hover:opacity-100 sm:h-44 sm:w-44"
+          />
+        </div>
+      )}
+
+      {/* real photo (optional). alt="" — the visible caption below labels the tile. */}
       {showPhoto && (
         <Image
           src={item.photo!}
