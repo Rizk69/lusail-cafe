@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
    image renders over both and the art is skipped. */
 const kindGrad: Record<string, string> = {
   latte: "from-brass/20 to-forest",
+  cold: "from-brass/15 to-ink",
   interior: "from-fern to-ink",
   beans: "from-moss to-ink",
   breakfast: "from-clay/25 to-forest",
@@ -90,7 +91,7 @@ export function Gallery() {
           subtitle={t.gallery.subtitle}
         />
 
-        <RevealStagger className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px]">
+        <RevealStagger className="mt-14 grid grid-flow-dense grid-cols-2 gap-4 md:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px]">
           {GALLERY.map((item) => (
             <RevealItem
               key={item.id}

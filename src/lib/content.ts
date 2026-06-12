@@ -171,12 +171,18 @@ export type GalleryItem = {
   photo?: string;
 };
 export const GALLERY: GalleryItem[] = [
-  { id: "latte", kind: "latte", caption: { ar: "فنّ اللاتيه", en: "Latte art" }, tall: true },
-  { id: "interior", kind: "interior", caption: { ar: "جلساتنا الدافئة", en: "Our cozy corners" }, wide: true },
-  { id: "beans", kind: "beans", caption: { ar: "حبوبٌ منتقاة", en: "Hand-picked beans" } },
-  { id: "breakfast", kind: "breakfast", caption: { ar: "فطور الصباح", en: "Morning breakfast" } },
-  { id: "dessert", kind: "dessert", caption: { ar: "حلوياتٌ شهيّة", en: "Sweet treats" } },
-  { id: "counter", kind: "counter", caption: { ar: "ركن الباريستا", en: "The barista bar" }, wide: true },
+  { id: "exterior", kind: "counter", caption: { ar: "بيتنا في عمّان", en: "Our home in Amman" }, wide: true, photo: "/gallery/exterior.jpg" },
+  { id: "mocktail", kind: "cold", caption: { ar: "موكتيل لوسيل المميّز", en: "Lusail signature mocktail" }, tall: true, photo: "/gallery/mocktail.jpg" },
+  { id: "hot-lotus", kind: "latte", caption: { ar: "لوتس ساخن", en: "Hot Lotus" }, photo: "/gallery/hot-lotus.jpg" },
+  { id: "shawarma", kind: "breakfast", caption: { ar: "شاورما الباريكية", en: "Parisian shawarma" }, wide: true, photo: "/gallery/shawarma.jpg" },
+  { id: "avocado", kind: "cold", caption: { ar: "أفوكادو فريش", en: "Fresh avocado" }, photo: "/gallery/avocado.jpg" },
+  { id: "interior", kind: "interior", caption: { ar: "جلساتنا الدافئة", en: "Our cozy seating" }, wide: true, photo: "/gallery/interior.jpg" },
+  { id: "cocktails", kind: "cold", caption: { ar: "كوكتيلات منعشة", en: "Fresh cocktails" }, tall: true, photo: "/gallery/cocktails.jpg" },
+  { id: "strawberry", kind: "cold", caption: { ar: "فريش فراولة", en: "Strawberry fresh" }, photo: "/gallery/strawberry.jpg" },
+  { id: "fries", kind: "breakfast", caption: { ar: "بطاطا لوسيل", en: "Lusail loaded fries" }, photo: "/gallery/fries.jpg" },
+  { id: "platter", kind: "breakfast", caption: { ar: "طبق المقبّلات", en: "Appetizer platter" }, photo: "/gallery/platter.jpg" },
+  { id: "sandwich", kind: "breakfast", caption: { ar: "ساندويتشاتنا", en: "Our sandwiches" }, photo: "/gallery/sandwich.jpg" },
+  { id: "lifestyle", kind: "interior", caption: { ar: "أجمل الأوقات في لوسيل", en: "Best moments at Lusail" }, wide: true, photo: "/gallery/lifestyle.jpg" },
 ];
 
 /* ---- locations / branches -------------------------------------------------- */
