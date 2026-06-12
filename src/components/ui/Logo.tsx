@@ -55,13 +55,13 @@ export function LogoMark({ title = "Lusail Café", decorative = false, className
 
       {/* gilded medallion */}
       <circle cx="24" cy="24" r="22.5" fill={`url(#${gid}-gold)`} />
-      <circle cx="24" cy="24" r="22.5" fill="none" stroke="#06120d" strokeOpacity="0.18" strokeWidth="1.5" />
-      <circle cx="24" cy="24" r="18.8" fill="none" stroke="#06120d" strokeOpacity="0.22" strokeWidth="1" />
+      <circle cx="24" cy="24" r="22.5" fill="none" stroke="#0a0a0a" strokeOpacity="0.18" strokeWidth="1.5" />
+      <circle cx="24" cy="24" r="18.8" fill="none" stroke="#0a0a0a" strokeOpacity="0.22" strokeWidth="1" />
 
       {/* cup + steam, carved in the deep-pine ink colour */}
       <g
         fill="none"
-        stroke="#06120d"
+        stroke="#0a0a0a"
         strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"

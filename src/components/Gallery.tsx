@@ -68,7 +68,7 @@ function Tile({ item }: { item: GalleryItem }) {
         <p
           className={cn(
             "font-display text-cream transition group-hover:-translate-y-0.5",
-            showPhoto && "[text-shadow:0_1px_10px_rgba(6,18,13,0.85)]",
+            showPhoto && "[text-shadow:0_1px_10px_rgba(0,0,0,0.9)]",
           )}
         >
           {pick(item.caption)}

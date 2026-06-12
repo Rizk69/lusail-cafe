@@ -7,22 +7,22 @@
    Bilingual AR / EN, fully RTL-aware (logical properties throughout).
 ============================================================================ */
 @theme {
-  /* greens — the calm, the "serene ambiance" */
-  --color-ink: #06120d;
-  --color-pine: #0a1c14;
-  --color-forest: #0f2519;
-  --color-moss: #163322;
-  --color-fern: #1d4630;
-  --color-line: #244c37;
+  /* warm blacks / charcoals — the night-luxe canvas (black & gold identity) */
+  --color-ink: #050505;
+  --color-pine: #0c0b08;
+  --color-forest: #15120d;
+  --color-moss: #1d1913;
+  --color-fern: #29231a;
+  --color-line: #3a3326;
 
-  /* brass / gold — the gilded accents */
+  /* brass / gold — the gilded accents (the hero of the palette) */
   --color-brass: #c9a25e;
   --color-brass-bright: #ecd29a;
   --color-brass-deep: #9a7330;
 
-  /* terracotta clay — warmth for food + CTAs */
-  --color-clay: #c76b43;
-  --color-clay-soft: #e0936a;
+  /* bronzed gold — warmth for food + CTAs (kept inside the gold family) */
+  --color-clay: #b8823f;
+  --color-clay-soft: #d6a866;
 
   /* light */
   --color-cream: #f4ecda;
@@ -33,7 +33,7 @@
   --font-body: var(--font-tajawal), ui-sans-serif, system-ui, sans-serif;
 
   --shadow-brass: 0 0 44px -10px rgba(201, 162, 94, 0.55);
-  --shadow-clay: 0 0 44px -10px rgba(199, 107, 67, 0.5);
+  --shadow-clay: 0 0 44px -10px rgba(184, 130, 63, 0.5);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -114,9 +114,9 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(1100px 720px at 80% -8%, rgba(201, 162, 94, 0.12), transparent 60%),
-    radial-gradient(820px 620px at 6% 4%, rgba(29, 70, 48, 0.55), transparent 58%),
-    radial-gradient(700px 700px at 95% 100%, rgba(199, 107, 67, 0.08), transparent 60%);
+    radial-gradient(1100px 720px at 80% -8%, rgba(201, 162, 94, 0.14), transparent 60%),
+    radial-gradient(820px 620px at 6% 4%, rgba(94, 74, 36, 0.30), transparent 58%),
+    radial-gradient(700px 700px at 95% 100%, rgba(184, 130, 63, 0.08), transparent 60%);
 }
 
 ::selection { background: var(--color-brass); color: var(--color-ink); }
@@ -142,7 +142,7 @@ body::before {
     color: transparent;
   }
   .text-clay-gradient {
-    background-image: linear-gradient(135deg, var(--color-clay-soft), var(--color-clay) 60%, #a04e2c);
+    background-image: linear-gradient(135deg, var(--color-clay-soft), var(--color-clay) 60%, #8a6326);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -204,7 +204,7 @@ body::before {
   .brass-frame {
     box-shadow:
       0 0 0 1px rgba(201, 162, 94, 0.55),
-      0 0 0 5px rgba(6, 18, 13, 0.92),
+      0 0 0 5px rgba(5, 5, 5, 0.94),
       0 0 0 6px rgba(201, 162, 94, 0.28);
   }
   .brass-hairline { box-shadow: 0 0 0 1px rgba(201, 162, 94, 0.32); }

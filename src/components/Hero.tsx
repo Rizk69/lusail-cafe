@@ -25,7 +25,7 @@ export function Hero() {
         <HeroScene />
       </div>
       {/* legibility + transition overlays */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_45%,rgba(6,18,13,0.55),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_45%,rgba(5,5,5,0.55),transparent_70%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-44 bg-gradient-to-b from-transparent to-pine" />
 
       {/* steam */}

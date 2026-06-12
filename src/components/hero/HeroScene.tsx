@@ -67,7 +67,7 @@ function CoffeeCup({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
 
   const ceramic = (
     <meshPhysicalMaterial
-      color="#10291b"
+      color="#15120d"
       roughness={0.28}
       metalness={0.1}
       clearcoat={0.9}
@@ -86,7 +86,7 @@ function CoffeeCup({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
       {/* inner wall (darker) */}
       <mesh position={[0, 0.04, 0]}>
         <cylinderGeometry args={[0.88, 0.66, 1.04, 64, 1, true]} />
-        <meshStandardMaterial color="#0a1c12" roughness={0.5} side={THREE.BackSide} />
+        <meshStandardMaterial color="#0a0908" roughness={0.5} side={THREE.BackSide} />
       </mesh>
       {/* coffee surface */}
       <mesh position={[0, 0.5, 0]} rotation={[0, 0, 0]}>
@@ -216,7 +216,7 @@ function Scene({ quality, scrollRef }: { quality: Quality; scrollRef: React.Muta
         <Lightformer intensity={1.3} position={[0, 2, 4]} scale={[8, 4, 1]} color="#fff3df" />
         <Lightformer intensity={1.5} position={[-4, 0, -3]} scale={[3, 6, 1]} color={BRASS} />
         <Lightformer intensity={0.9} position={[4, 1, -2]} scale={[3, 4, 1]} color={BRASS_BRIGHT} />
-        <Lightformer intensity={0.6} position={[0, -3, 2]} scale={[6, 3, 1]} color="#1d4630" />
+        <Lightformer intensity={0.6} position={[0, -3, 2]} scale={[6, 3, 1]} color="#4a3a1d" />
       </Environment>
       <GildedRing scrollRef={scrollRef} />
       <Float speed={1.1} rotationIntensity={0.15} floatIntensity={0.35}>
