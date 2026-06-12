@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
-import { SITE, STATS, HERO_SLIDES } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
+import { HERO_SLIDES } from "@/lib/content";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Counter } from "@/components/ui/Counter";
 import { BagIcon, ArrowIcon, ChevronDownIcon } from "@/components/ui/Icons";
@@ -14,6 +15,7 @@ const SLIDE_MS = 5000;
 
 export function Hero() {
   const { t, pick } = useLocale();
+  const { settings } = useSiteData();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -112,7 +114,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mt-9 flex flex-wrap items-center justify-center gap-3"
         >
-          <MagneticButton href={SITE.talabat}>
+          <MagneticButton href={settings.talabat}>
             <BagIcon className="h-4 w-4" />
             {t.hero.orderCta}
           </MagneticButton>
@@ -130,7 +132,7 @@ export function Hero() {
         transition={{ delay: 1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="relative mt-14 grid w-full max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl glass-hero sm:grid-cols-4"
       >
-        {STATS.map((s) => (
+        {settings.stats.map((s) => (
           <div key={s.value} className="flex flex-col items-center gap-1 px-3 py-5">
             <Counter value={s.value} className="font-display text-3xl text-brass" />
             <span className="text-center text-xs text-sand/75">{pick(s.label)}</span>

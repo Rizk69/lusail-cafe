@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useLocale } from "@/lib/LocaleProvider";
-import { STATS } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Parallax } from "@/components/ui/Parallax";
@@ -13,6 +13,7 @@ import { StarIcon, ArrowIcon } from "@/components/ui/Icons";
 /** About — the café's story beside a real photo of the space. */
 export function About() {
   const { t, pick } = useLocale();
+  const { settings } = useSiteData();
 
   return (
     <section id="about" className="relative py-24 sm:py-32">
@@ -61,7 +62,7 @@ export function About() {
                       <StarIcon key={i} className="h-3.5 w-3.5 text-brass" />
                     ))}
                   </div>
-                  <p className="mt-1 text-[10px] text-sand/80">{pick(STATS[3].label)}</p>
+                  <p className="mt-1 text-[10px] text-sand/80">{pick(settings.stats[3].label)}</p>
                 </div>
               </div>
             </Parallax>

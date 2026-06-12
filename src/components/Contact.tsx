@@ -2,7 +2,8 @@
 
 import { useState, type ComponentType, type SVGProps } from "react";
 import { useLocale } from "@/lib/LocaleProvider";
-import { SITE, BRANCHES } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
+import { submitMessage } from "@/lib/data/messages";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -21,20 +22,26 @@ type Social = {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
-const SOCIALS: Social[] = [
-  { href: SITE.instagram, label: "Instagram", Icon: InstagramIcon },
-  { href: SITE.facebook, label: "Facebook", Icon: FacebookIcon },
-  { href: `https://wa.me/${SITE.whatsapp}`, label: "WhatsApp", Icon: WhatsappIcon },
-];
-
 export function Contact() {
   const { t, pick } = useLocale();
+  const { settings, branches } = useSiteData();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const SOCIALS: Social[] = [
+    { href: settings.instagram, label: "Instagram", Icon: InstagramIcon },
+    { href: settings.facebook, label: "Facebook", Icon: FacebookIcon },
+    { href: `https://wa.me/${settings.whatsapp}`, label: "WhatsApp", Icon: WhatsappIcon },
+  ];
 
   const send = () => {
+    // Save to the dashboard inbox (no-op if Firebase isn't configured)...
+    void submitMessage({ name, message });
+    if (name || message) setSent(true);
+    // ...and hand off to WhatsApp as before.
     const text = encodeURIComponent(`${name} - ${message}`);
-    window.open(`https://wa.me/${SITE.whatsapp}?text=${text}`, "_blank");
+    window.open(`https://wa.me/${settings.whatsapp}?text=${text}`, "_blank");
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,10 +70,10 @@ export function Contact() {
                   <div className="flex flex-col gap-1">
                     <span className="text-xs text-sand/60">{t.contact.phoneLabel}</span>
                     <a
-                      href={`tel:${SITE.phoneTel}`}
+                      href={`tel:${settings.phoneTel}`}
                       className="font-display text-lg text-cream transition-colors hover:text-brass"
                     >
-                      <span dir="ltr">{SITE.phoneDisplay}</span>
+                      <span dir="ltr">{settings.phoneDisplay}</span>
                     </a>
                   </div>
                 </div>
@@ -76,7 +83,7 @@ export function Contact() {
                   <ClockIcon className="mt-0.5 h-5 w-5 shrink-0 text-brass" />
                   <div className="flex flex-col gap-1">
                     <span className="text-xs text-sand/60">{t.contact.hoursLabel}</span>
-                    <span className="text-cream">{pick(BRANCHES[0].hours)}</span>
+                    <span className="text-cream">{pick(branches[0].hours)}</span>
                   </div>
                 </div>
 
@@ -101,7 +108,7 @@ export function Contact() {
                   </div>
                 </div>
 
-                <MagneticButton href={SITE.talabat} variant="clay">
+                <MagneticButton href={settings.talabat} variant="clay">
                   <BagIcon className="h-4 w-4" />
                   {t.contact.orderCta}
                 </MagneticButton>
@@ -143,6 +150,12 @@ export function Contact() {
                   <WhatsappIcon className="h-4 w-4" />
                   {t.contact.formSend}
                 </MagneticButton>
+
+                {sent && (
+                  <p className="text-center text-xs text-brass">
+                    {pick({ ar: "تم الإرسال! سنردّ عليك قريباً.", en: "Sent! We'll reply soon." })}
+                  </p>
+                )}
               </form>
             </div>
           </div>

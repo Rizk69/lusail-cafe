@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
-import { MENU, SITE } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -12,9 +12,10 @@ import { cn } from "@/lib/utils";
 
 export function Menu() {
   const { t, pick } = useLocale();
-  const [active, setActive] = useState<string>(MENU[0].id);
+  const { menu, settings } = useSiteData();
+  const [active, setActive] = useState<string>(menu[0].id);
 
-  const category = MENU.find((c) => c.id === active) ?? MENU[0];
+  const category = menu.find((c) => c.id === active) ?? menu[0];
 
   return (
     <section id="menu" className="relative py-24 sm:py-32">
@@ -24,7 +25,7 @@ export function Menu() {
         {/* category tabs */}
         <Reveal>
           <div className="mt-12 flex gap-2 overflow-x-auto no-scrollbar mask-fade-x justify-start sm:justify-center">
-            {MENU.map((cat) => {
+            {menu.map((cat) => {
               const isActive = cat.id === active;
               return (
                 <button
@@ -87,7 +88,7 @@ export function Menu() {
         <p className="mt-8 text-center text-xs italic text-sand/50">{t.menu.note}</p>
 
         <div className="mt-6 flex justify-center">
-          <MagneticButton href={SITE.talabat} variant="clay">
+          <MagneticButton href={settings.talabat} variant="clay">
             <BagIcon className="h-4 w-4" />
             {t.menu.orderCta}
           </MagneticButton>

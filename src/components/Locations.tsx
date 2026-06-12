@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@/lib/LocaleProvider";
-import { BRANCHES } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -15,6 +15,7 @@ const MAP_GRID =
 
 export function Locations() {
   const { t, pick } = useLocale();
+  const { branches } = useSiteData();
 
   return (
     <section id="locations" className="relative py-24 sm:py-32">
@@ -22,7 +23,7 @@ export function Locations() {
         <SectionHeader eyebrow={t.locations.eyebrow} title={t.locations.title} />
 
         <RevealStagger className="mt-14 grid gap-6 md:grid-cols-2">
-          {BRANCHES.map((branch) => (
+          {branches.map((branch) => (
             <RevealItem key={branch.id}>
               <article className="group relative overflow-hidden rounded-3xl card-surface border border-line/60 p-6 transition hover:border-brass/40 sm:p-8">
                 <span className="sheen-layer rounded-3xl" />

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useLocale } from "@/lib/LocaleProvider";
-import { GALLERY } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import type { GalleryItem } from "@/lib/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
@@ -81,6 +81,7 @@ function Tile({ item }: { item: GalleryItem }) {
 
 export function Gallery() {
   const { t } = useLocale();
+  const { gallery } = useSiteData();
 
   return (
     <section id="gallery" className="relative py-24 sm:py-32">
@@ -92,7 +93,7 @@ export function Gallery() {
         />
 
         <RevealStagger className="mt-14 grid grid-flow-dense grid-cols-2 gap-4 md:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px]">
-          {GALLERY.map((item) => (
+          {gallery.map((item) => (
             <RevealItem
               key={item.id}
               className={cn(item.wide && "md:col-span-2", item.tall && "row-span-2")}

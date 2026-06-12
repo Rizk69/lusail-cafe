@@ -1,13 +1,14 @@
 "use client";
 
 import { useLocale } from "@/lib/LocaleProvider";
-import { REVIEWS } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { StarIcon, QuoteIcon } from "@/components/ui/Icons";
 
 export function Reviews() {
   const { t, pick } = useLocale();
+  const { reviews } = useSiteData();
 
   return (
     <section className="relative py-24 sm:py-32">
@@ -15,7 +16,7 @@ export function Reviews() {
         <SectionHeader eyebrow={t.reviews.eyebrow} title={t.reviews.title} />
 
         <RevealStagger className="mt-14 grid gap-5 md:grid-cols-3">
-          {REVIEWS.map((review) => {
+          {reviews.map((review) => {
             const name = pick(review.name);
             return (
               <RevealItem key={review.name.en}>

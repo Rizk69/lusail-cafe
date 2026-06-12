@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@/lib/LocaleProvider";
-import { SITE, BRANCHES } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { LogoMark } from "@/components/ui/Logo";
 import {
@@ -19,12 +19,13 @@ type IconCmp = (p: SVGProps<SVGSVGElement>) => ReactElement;
 
 export function Footer() {
   const { t, pick } = useLocale();
+  const { settings, branches } = useSiteData();
   const year = new Date().getFullYear();
 
   const socials: { label: string; href: string; Icon: IconCmp }[] = [
-    { label: "Instagram", href: SITE.instagram, Icon: InstagramIcon },
-    { label: "Facebook", href: SITE.facebook, Icon: FacebookIcon },
-    { label: "WhatsApp", href: `https://wa.me/${SITE.whatsapp}`, Icon: WhatsappIcon },
+    { label: "Instagram", href: settings.instagram, Icon: InstagramIcon },
+    { label: "Facebook", href: settings.facebook, Icon: FacebookIcon },
+    { label: "WhatsApp", href: `https://wa.me/${settings.whatsapp}`, Icon: WhatsappIcon },
   ];
 
   const quickLinks: { href: string; label: string }[] = [
@@ -89,7 +90,7 @@ export function Footer() {
             <div>
               <h3 className="mb-4 font-display text-cream">{t.footer.visitUs}</h3>
               <div className="flex flex-col gap-4">
-                {BRANCHES.map((b) => (
+                {branches.map((b) => (
                   <div key={b.id}>
                     <p className="text-sm text-cream">{pick(b.name)}</p>
                     <p className="mt-1 flex items-start gap-2 text-xs text-sand/60">
@@ -109,14 +110,14 @@ export function Footer() {
               <div className="flex flex-col gap-3">
                 <p className="flex items-center gap-2 text-sm text-sand/70">
                   <ClockIcon className="h-4 w-4 shrink-0 text-brass" />
-                  <span>{pick(BRANCHES[0].hours)}</span>
+                  <span>{pick(branches[0].hours)}</span>
                 </p>
                 <a
-                  href={`tel:${SITE.phoneTel}`}
+                  href={`tel:${settings.phoneTel}`}
                   className="flex items-center gap-2 text-sm text-sand/70 transition-colors hover:text-brass"
                 >
                   <PhoneIcon className="h-4 w-4 shrink-0 text-brass" />
-                  <span dir="ltr">{SITE.phoneDisplay}</span>
+                  <span dir="ltr">{settings.phoneDisplay}</span>
                 </a>
               </div>
             </div>

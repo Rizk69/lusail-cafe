@@ -1,3 +1,5 @@
+import { Preloader } from "@/components/Preloader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { MarqueeStrip } from "@/components/MarqueeStrip";
@@ -14,6 +16,8 @@ import { Footer } from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <Preloader />
+      <ScrollProgress />
       <Navbar />
       <main className="flex-1">
         <Hero />

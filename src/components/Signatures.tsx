@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useLocale } from "@/lib/LocaleProvider";
-import { SIGNATURES, SITE } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -11,6 +11,7 @@ import { BagIcon } from "@/components/ui/Icons";
 /** Signatures — a photo showcase of the café's most-loved drinks & plates. */
 export function Signatures() {
   const { t, pick } = useLocale();
+  const { signatures, settings } = useSiteData();
 
   return (
     <section id="signatures" className="relative py-24 sm:py-32">
@@ -22,7 +23,7 @@ export function Signatures() {
         />
 
         <RevealStagger className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-4">
-          {SIGNATURES.map((s) => (
+          {signatures.map((s) => (
             <RevealItem key={s.id}>
               <div className="group relative aspect-[3/4] overflow-hidden rounded-3xl border border-brass/20">
                 <Image
@@ -48,7 +49,7 @@ export function Signatures() {
         </RevealStagger>
 
         <div className="mt-12 flex justify-center">
-          <MagneticButton href={SITE.talabat} variant="clay">
+          <MagneticButton href={settings.talabat} variant="clay">
             <BagIcon className="h-4 w-4" />
             {t.hero.orderCta}
           </MagneticButton>

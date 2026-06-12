@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
-import { SITE } from "@/lib/content";
+import { useSiteData } from "@/lib/SiteDataProvider";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { LogoMark } from "@/components/ui/Logo";
 import { BagIcon, MenuIcon, CloseIcon } from "@/components/ui/Icons";
@@ -28,6 +28,7 @@ function Brand() {
 
 export function Navbar() {
   const { t, locale, toggle } = useLocale();
+  const { settings } = useSiteData();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -83,7 +84,7 @@ export function Navbar() {
             </button>
 
             <div className="hidden sm:block">
-              <MagneticButton href={SITE.talabat} className="px-5 py-2.5 text-[13px]">
+              <MagneticButton href={settings.talabat} className="px-5 py-2.5 text-[13px]">
                 <BagIcon className="h-4 w-4" />
                 {t.nav.order}
               </MagneticButton>
@@ -139,7 +140,7 @@ export function Navbar() {
                 </motion.a>
               ))}
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="mt-8">
-                <MagneticButton href={SITE.talabat} className="w-full">
+                <MagneticButton href={settings.talabat} className="w-full">
                   <BagIcon className="h-4 w-4" />
                   {t.nav.order}
                 </MagneticButton>

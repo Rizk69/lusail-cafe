@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Manrope, El_Messiri, Tajawal } from "next/font/google";
 import { LocaleProvider } from "@/lib/LocaleProvider";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { Preloader } from "@/components/Preloader";
+import { SiteDataProvider } from "@/lib/SiteDataProvider";
 import "./globals.css";
 
 /* Latin pairing (EN) */
@@ -58,9 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <body className="flex min-h-full flex-col">
         <LocaleProvider>
-          <Preloader />
-          <ScrollProgress />
-          {children}
+          <SiteDataProvider>{children}</SiteDataProvider>
         </LocaleProvider>
       </body>
     </html>
