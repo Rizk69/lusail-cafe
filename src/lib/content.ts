@@ -182,7 +182,30 @@ export const GALLERY: GalleryItem[] = [
   { id: "fries", kind: "breakfast", caption: { ar: "بطاطا لوسيل", en: "Lusail loaded fries" }, photo: "/gallery/fries.jpg" },
   { id: "platter", kind: "breakfast", caption: { ar: "طبق المقبّلات", en: "Appetizer platter" }, photo: "/gallery/platter.jpg" },
   { id: "sandwich", kind: "breakfast", caption: { ar: "ساندويتشاتنا", en: "Our sandwiches" }, photo: "/gallery/sandwich.jpg" },
+  { id: "mango", kind: "cold", caption: { ar: "عصير مانجو", en: "Mango juice" }, photo: "/gallery/mango.jpg" },
+  { id: "grill", kind: "counter", caption: { ar: "فعاليات لوسيل", en: "Lusail events" }, photo: "/gallery/grill.jpg" },
   { id: "lifestyle", kind: "interior", caption: { ar: "أجمل الأوقات في لوسيل", en: "Best moments at Lusail" }, wide: true, photo: "/gallery/lifestyle.jpg" },
+];
+
+/* ---- hero slideshow (cinematic full-bleed) --------------------------------- */
+export const HERO_SLIDES: string[] = [
+  "/gallery/exterior.jpg",
+  "/gallery/interior.jpg",
+  "/gallery/mocktail.jpg",
+  "/gallery/shawarma.jpg",
+];
+
+/* ---- signature drinks & dishes (photo showcase) ---------------------------- */
+export type Signature = { id: string; photo: string; name: Bi; note: Bi };
+export const SIGNATURES: Signature[] = [
+  { id: "mocktail", photo: "/gallery/mocktail.jpg", name: { ar: "موكتيل لوسيل", en: "Lusail Mocktail" }, note: { ar: "توقيعنا المميّز", en: "Our signature" } },
+  { id: "avocado", photo: "/gallery/avocado.jpg", name: { ar: "أفوكادو فريش", en: "Avocado Fresh" }, note: { ar: "كريمي ومنعش", en: "Creamy & fresh" } },
+  { id: "strawberry", photo: "/gallery/strawberry.jpg", name: { ar: "فريش فراولة", en: "Strawberry Fresh" }, note: { ar: "حلو وطبيعي", en: "Sweet & natural" } },
+  { id: "cocktails", photo: "/gallery/cocktails.jpg", name: { ar: "كوكتيل فريش", en: "Fresh Cocktail" }, note: { ar: "طبقات ملوّنة", en: "Layered & vivid" } },
+  { id: "mango", photo: "/gallery/mango.jpg", name: { ar: "عصير مانجو", en: "Mango Juice" }, note: { ar: "صيفي وغني", en: "Rich & summery" } },
+  { id: "hot-lotus", photo: "/gallery/hot-lotus.jpg", name: { ar: "لوتس ساخن", en: "Hot Lotus" }, note: { ar: "دافئ بنكهة اللوتس", en: "Warm lotus" } },
+  { id: "shawarma", photo: "/gallery/shawarma.jpg", name: { ar: "شاورما الباريكية", en: "Parisian Shawarma" }, note: { ar: "الأكثر طلباً", en: "Bestseller" } },
+  { id: "fries", photo: "/gallery/fries.jpg", name: { ar: "بطاطا لوسيل", en: "Lusail Fries" }, note: { ar: "مقرمشة ومحمّلة", en: "Crispy & loaded" } },
 ];
 
 /* ---- locations / branches -------------------------------------------------- */

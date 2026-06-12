@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/lib/LocaleProvider";
 import { STATS } from "@/lib/content";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -7,12 +8,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Parallax } from "@/components/ui/Parallax";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Counter } from "@/components/ui/Counter";
-import { CupIcon, StarIcon, ArrowIcon } from "@/components/ui/Icons";
+import { StarIcon, ArrowIcon } from "@/components/ui/Icons";
 
-/** Concentric gilded rings, sized inside-out (literal classes so Tailwind scans them). */
-const RINGS = ["h-44 w-44", "h-64 w-64", "h-80 w-80", "h-[23rem] w-[23rem]"] as const;
-
-/** About — the café's story beside a decorative gilded emblem. */
+/** About — the café's story beside a real photo of the space. */
 export function About() {
   const { t, pick } = useLocale();
 
@@ -41,25 +39,19 @@ export function About() {
             </Reveal>
           </div>
 
-          {/* VISUAL — gilded emblem */}
+          {/* VISUAL — real photo of the space */}
           <Reveal variant="scale" delay={0.1}>
             <Parallax speed={40}>
-              <div className="group relative h-[28rem] overflow-hidden rounded-3xl card-surface brass-frame grain">
+              <div className="group relative h-[28rem] overflow-hidden rounded-3xl brass-frame">
+                <Image
+                  src="/gallery/interior.jpg"
+                  alt={pick({ ar: "جلسات كافيه لوسيل", en: "Inside Lusail Café" })}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-ink/10" />
                 <span className="sheen-layer rounded-3xl" />
-
-                {/* concentric rings */}
-                {RINGS.map((size) => (
-                  <span
-                    key={size}
-                    className={`absolute inset-0 m-auto rounded-full border border-brass/20 ${size}`}
-                  />
-                ))}
-
-                {/* soft brass aura behind the cup */}
-                <span className="absolute inset-0 m-auto h-48 w-48 rounded-full bg-brass/10 blur-2xl" />
-
-                {/* centered emblem */}
-                <CupIcon className="absolute inset-0 m-auto h-40 w-40 text-brass/80 animate-[float_7s_ease-in-out_infinite]" />
 
                 {/* floating rating badge */}
                 <div className="absolute bottom-4 end-4 rounded-2xl glass px-4 py-3 text-center">

@@ -59,6 +59,11 @@ export const messages = {
       title: "لمحاتٌ من لوسيل",
       subtitle: "كل ركن في المكان قصّة — تعالَ وعِشها بنفسك.",
     },
+    signatures: {
+      eyebrow: "نكهاتنا",
+      title: "توقيعات لوسيل",
+      subtitle: "أكثر ما يطلبه زوّارنا — مشروبات وأطباق من قلب المنيو.",
+    },
     locations: {
       eyebrow: "فروعنا",
       title: "زورونا في أقرب فرع",
@@ -137,6 +142,11 @@ export const messages = {
       eyebrow: "The Vibe",
       title: "Moments from Lusail",
       subtitle: "Every corner tells a story — come live it yourself.",
+    },
+    signatures: {
+      eyebrow: "Tastes",
+      title: "Lusail signatures",
+      subtitle: "What our guests love most — drinks and plates straight from the menu.",
     },
     locations: {
       eyebrow: "Our Branches",
