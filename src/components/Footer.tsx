@@ -3,6 +3,7 @@
 import { useLocale } from "@/lib/LocaleProvider";
 import { SITE, BRANCHES } from "@/lib/content";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
+import { LogoMark } from "@/components/ui/Logo";
 import {
   InstagramIcon,
   FacebookIcon,
@@ -42,10 +43,7 @@ export function Footer() {
           <RevealItem>
             <div>
               <div className="flex items-center gap-2.5">
-                <span className="relative grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-brass-bright to-brass-deep font-display text-xl text-ink shadow-[0_6px_18px_-6px_rgba(201,162,94,0.8)]">
-                  <span className="leading-none">ل</span>
-                  <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-ink/20" />
-                </span>
+                <LogoMark decorative title={t.brand.full} className="h-11 w-11 shrink-0" />
                 <span className="font-display text-lg text-cream">{t.brand.full}</span>
               </div>
 

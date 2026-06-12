@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
+import { LogoMark } from "@/components/ui/Logo";
 
 const SESSION_KEY = "lusail-intro-seen";
 
@@ -78,14 +79,13 @@ export function Preloader() {
               ))}
             </div>
 
-            <motion.span
-              initial={{ opacity: 0, scale: 0.7 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.45, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-              className="font-display text-5xl text-brass-gradient"
             >
-              ل
-            </motion.span>
+              <LogoMark decorative title={t.brand.full} className="h-[5.5rem] w-[5.5rem]" />
+            </motion.div>
           </div>
 
           <motion.div

@@ -5,17 +5,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
 import { SITE } from "@/lib/content";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { LogoMark } from "@/components/ui/Logo";
 import { BagIcon, MenuIcon, CloseIcon } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 
-function LogoMark() {
+function Brand() {
   const { t } = useLocale();
   return (
     <a href="#top" className="group flex items-center gap-2.5" aria-label={t.brand.full}>
-      <span className="relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-brass-bright to-brass-deep text-ink shadow-[0_6px_18px_-6px_rgba(201,162,94,0.8)]">
-        <span className="font-display text-xl leading-none">ل</span>
-        <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-ink/20" />
-      </span>
+      <LogoMark
+        decorative
+        title={t.brand.full}
+        className="h-10 w-10 shrink-0 drop-shadow-[0_6px_18px_rgba(201,162,94,0.45)] transition-transform duration-500 group-hover:rotate-[8deg]"
+      />
       <span className="flex flex-col leading-none">
         <span className="font-display text-lg text-cream">{t.brand.full}</span>
         <span className="text-[10px] tracking-[0.3em] text-brass/70">AMMAN</span>
@@ -56,7 +58,7 @@ export function Navbar() {
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
-          <LogoMark />
+          <Brand />
 
           <div className="hidden items-center gap-8 lg:flex">
             {links.map((l) => (
@@ -109,7 +111,7 @@ export function Navbar() {
             className="fixed inset-0 z-[70] flex flex-col bg-ink/95 backdrop-blur-xl lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-4">
-              <LogoMark />
+              <Brand />
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"

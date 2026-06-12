@@ -160,7 +160,16 @@ export const MENU: MenuCategory[] = [
    `kind` selects an on-brand SVG/CSS composition in <Gallery>. Swap a tile for
    a real photo later by replacing it with <Image src=.../> in that component.
 --------------------------------------------------------------------------- */
-export type GalleryItem = { id: string; kind: string; caption: Bi; wide?: boolean; tall?: boolean };
+export type GalleryItem = {
+  id: string;
+  kind: string;
+  caption: Bi;
+  wide?: boolean;
+  tall?: boolean;
+  /** Optional real photo under /public, e.g. "/gallery/latte.jpg". Falls back
+      to the on-brand SVG art when unset or the file is missing. */
+  photo?: string;
+};
 export const GALLERY: GalleryItem[] = [
   { id: "latte", kind: "latte", caption: { ar: "فنّ اللاتيه", en: "Latte art" }, tall: true },
   { id: "interior", kind: "interior", caption: { ar: "جلساتنا الدافئة", en: "Our cozy corners" }, wide: true },
