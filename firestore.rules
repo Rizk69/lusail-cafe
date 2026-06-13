@@ -6,10 +6,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ⚠️ SECURITY: this currently allows ANY authenticated user to write. Because
+    // Email/Password sign-up is reachable via Firebase's public API, a stranger
+    // could self-register and then write. STRONGLY recommended: restrict to your
+    // admin email(s) by replacing the return below with the commented line.
     function isAdmin() {
-      // Any authenticated user. To restrict to specific emails, replace with:
-      // return request.auth != null && request.auth.token.email in ['you@example.com'];
       return request.auth != null;
+      // return request.auth != null && request.auth.token.email in ['you@example.com'];
     }
 
     match /menu/{doc}       { allow read: if true; allow write: if isAdmin(); }

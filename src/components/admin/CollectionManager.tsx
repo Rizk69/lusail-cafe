@@ -60,7 +60,8 @@ export function CollectionManager({
     setStatus("جارٍ الحفظ…");
     try {
       if (isNew) {
-        await createDoc(coll, { ...draft, order: items.length });
+        const order = Math.max(-1, ...items.map((it) => (it as Item).order ?? -1)) + 1;
+        await createDoc(coll, { ...draft, order });
       } else {
         const { id, ...data } = draft;
         await saveDoc(coll, id as string, data);
@@ -122,7 +123,14 @@ export function CollectionManager({
               )}
               {f.type === "number" && (
                 <Field label={f.label}>
-                  <TextInput type="number" value={draft[f.key] ?? ""} onChange={(e) => set(f.key, Number(e.target.value))} />
+                  <TextInput
+                    type="number"
+                    value={draft[f.key] ?? ""}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      set(f.key, v === "" ? "" : Number(v));
+                    }}
+                  />
                 </Field>
               )}
               {f.type === "bool" && (

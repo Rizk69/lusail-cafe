@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/lib/LocaleProvider";
 import { useSiteData } from "@/lib/SiteDataProvider";
@@ -14,6 +14,11 @@ export function Menu() {
   const { t, pick } = useLocale();
   const { menu, settings } = useSiteData();
   const [active, setActive] = useState<string>(menu[0].id);
+
+  // after live data hydrates, keep the active tab valid (ids may differ)
+  useEffect(() => {
+    if (!menu.some((c) => c.id === active)) setActive(menu[0]?.id ?? "");
+  }, [menu, active]);
 
   const category = menu.find((c) => c.id === active) ?? menu[0];
 

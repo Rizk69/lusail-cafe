@@ -34,15 +34,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const auth = getFirebaseAuth();
-    if (!auth) {
+    try {
+      const auth = getFirebaseAuth();
+      if (!auth) {
+        setLoading(false);
+        return;
+      }
+      return onAuthStateChanged(auth, (u) => {
+        setUser(u);
+        setLoading(false);
+      });
+    } catch (e) {
+      console.error("Auth init failed", e);
       setLoading(false);
-      return;
     }
-    return onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setLoading(false);
-    });
   }, []);
 
   const isAdmin =

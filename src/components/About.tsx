@@ -62,7 +62,9 @@ export function About() {
                       <StarIcon key={i} className="h-3.5 w-3.5 text-brass" />
                     ))}
                   </div>
-                  <p className="mt-1 text-[10px] text-sand/80">{pick(settings.stats[3].label)}</p>
+                  <p className="mt-1 text-[10px] text-sand/80">
+                    {pick(settings.stats?.[3]?.label ?? { ar: "تقييم الزوّار", en: "Guest rating" })}
+                  </p>
                 </div>
               </div>
             </Parallax>

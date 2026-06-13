@@ -46,17 +46,29 @@ function Tile({ item }: { item: GalleryItem }) {
         </div>
       )}
 
-      {/* real photo (optional). alt="" — the visible caption below labels the tile. */}
-      {showPhoto && (
-        <Image
-          src={item.photo!}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 50vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          onError={() => setPhotoOk(false)}
-        />
-      )}
+      {/* real photo (optional). alt="" — the visible caption below labels the tile.
+          Absolute URLs (admin-pasted) use a plain <img> so a non-allowlisted host
+          can't make next/image throw and blank the section; local /public paths
+          and uploaded Storage URLs go through the optimizer. */}
+      {showPhoto &&
+        (/^https?:\/\//.test(item.photo!) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.photo!}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={() => setPhotoOk(false)}
+          />
+        ) : (
+          <Image
+            src={item.photo!}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={() => setPhotoOk(false)}
+          />
+        ))}
 
       {/* darken the bottom so the caption stays legible (AA) over bright photos */}
       {showPhoto && (

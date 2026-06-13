@@ -5,7 +5,7 @@
    so the UI is identical whether data comes from Firestore or the fallback.
 ============================================================================ */
 
-import { collection, getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { getDb, isFirebaseConfigured } from "@/lib/firebase/client";
 import type { Bi } from "@/lib/i18n";
 import {
@@ -67,9 +67,13 @@ async function readCollection<T>(name: string): Promise<T[] | null> {
   const db = getDb();
   if (!db) return null;
   try {
-    const snap = await getDocs(query(collection(db, name), orderBy("order")));
-    if (snap.empty) return null;
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as T);
+    // Sort client-side (not orderBy, which silently excludes docs missing the
+    // field) so the public read matches the dashboard's listDocs ordering.
+    const snap = await getDocs(collection(db, name));
+    if (snap.empty) return null; // empty → keep the static fallback (never blank)
+    const rows = snap.docs.map((d) => ({ ...d.data(), id: d.id }) as T);
+    rows.sort((a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0));
+    return rows;
   } catch {
     return null;
   }

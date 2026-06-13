@@ -106,7 +106,13 @@ export function MenuManager() {
     load();
   }, [load]);
 
-  const addCategory = () => setCats((c) => [...c, { name: { ar: "فئة جديدة", en: "New category" }, items: [] }]);
+  // Create the category in Firestore immediately so nothing is lost if the user
+  // then edits/saves another category before saving this one.
+  const addCategory = async () => {
+    const order = Math.max(-1, ...cats.map((c) => c.order ?? -1)) + 1;
+    await createDoc("menu", { name: { ar: "فئة جديدة", en: "New category" }, items: [], order });
+    await load();
+  };
 
   return (
     <div>

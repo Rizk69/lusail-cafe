@@ -26,13 +26,26 @@ export function Signatures() {
           {signatures.map((s) => (
             <RevealItem key={s.id}>
               <div className="group relative aspect-[3/4] overflow-hidden rounded-3xl border border-brass/20">
-                <Image
-                  src={s.photo}
-                  alt={pick(s.name)}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                {s.photo ? (
+                  /^https?:\/\//.test(s.photo) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={s.photo}
+                      alt={pick(s.name)}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  ) : (
+                    <Image
+                      src={s.photo}
+                      alt={pick(s.name)}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  )
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-brass/20 to-ink" />
+                )}
                 {/* legibility scrim */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
                 <span className="sheen-layer rounded-3xl" />

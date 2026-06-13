@@ -26,7 +26,7 @@ function db() {
 
 export async function listDocs<T extends Doc = Doc>(coll: string): Promise<(T & { id: string })[]> {
   const snap = await getDocs(collection(db(), coll));
-  const rows = snap.docs.map((d) => ({ id: d.id, ...(d.data() as T) }));
+  const rows = snap.docs.map((d) => ({ ...(d.data() as T), id: d.id }));
   rows.sort((a, b) => ((a as Doc).order ?? 0) - ((b as Doc).order ?? 0));
   return rows;
 }
@@ -56,8 +56,10 @@ export async function saveSettings(data: Doc) {
 /** Upload an image to Storage and return its public download URL. */
 export async function uploadImage(file: File, path: string): Promise<string> {
   const storage = getFirebaseStorage();
-  if (!storage) throw new Error("Storage not configured");
-  const r = ref(storage, path);
+  if (!storage) throw new Error("Storage not configured (NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET?)");
+  // sanitize so reserved/Unicode chars can't create odd object paths
+  const safe = path.replace(/[^a-zA-Z0-9._/-]/g, "_");
+  const r = ref(storage, safe);
   await uploadBytes(r, file);
   return getDownloadURL(r);
 }
